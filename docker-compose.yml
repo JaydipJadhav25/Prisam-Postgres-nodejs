@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  postgres:
+    container_name: prisma-db
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_prisma:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: prisma
+      POSTGRES_PASSWORD: prisma
+
+volumes:
+  postgres_prisma:
