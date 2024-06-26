@@ -20,6 +20,37 @@ model User{
   password String?
   salt String
   created_at DateTime @default(now())
-   
+  post Post[]
+  comment Comments[]
+
+  
    @@map("users")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+   user User @relation(fields: [userid] , references: [id] , onDelete: Cascade)
+  userid Int
+  title     String   @db.VarChar(255)
+  content   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  commentscount BigInt @default(0)
+  comment Comments[]
+
+  @@map("posts")
+
+}
+
+model Comments{
+  id String @id @default(uuid())
+  post Post @relation(fields: [postid] , references: [id] , onDelete: Cascade)
+  postid Int
+  user User @relation(fields: [userid] , references: [id], onDelete: Cascade)
+  userid Int
+  content   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt  
+
+  @@map("comments")
 }

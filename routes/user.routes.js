@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createuser, loginuser, logout, updateinfo } from "../controllers/user.controller.js";
+import { createuser, fetchusers, loginuser, logout, updateinfo } from "../controllers/user.controller.js";
 import checkauthuser from "../middleware/auth.midd.js";
 
 const router = Router();
@@ -12,6 +12,8 @@ router.route("/signup").post(createuser)
 router.route("/login").post(loginuser)
 router.route("/logout").get(checkauthuser, logout)
 router.route("/:id").patch(checkauthuser, updateinfo)
+router.route("/allusers").get(fetchusers)
+
 
 
 

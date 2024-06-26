@@ -138,9 +138,19 @@ const updateinfo = async(req, res) =>{
       })
 }
 
+const fetchusers =async (req , res) =>{
+
+    const users = await prisma.user.findMany({})
+
+    return res.json({
+        users
+    })
+} 
+
 export {
     createuser,
     loginuser,
     logout,
-    updateinfo
+    updateinfo,
+    fetchusers
 }
