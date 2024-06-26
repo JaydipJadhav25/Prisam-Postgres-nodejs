@@ -35,7 +35,7 @@ model Post {
   content   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  commentscount BigInt @default(0)
+  commentscount Int @default(0)
   comment Comments[]
 
   @@map("posts")

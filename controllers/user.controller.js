@@ -1,4 +1,4 @@
-import e from "express";
+// import e from "express";
 import { prisma } from "../src/lib/db.js";
 import { createHmac , randomBytes} from "node:crypto"
 import jwt from "jsonwebtoken"
@@ -31,7 +31,7 @@ function genreatehashpassword(password , salt){
                     return hashedpassword;   
 }
 
-
+//
 const createuser = async(req, res) =>{
 
 const{ name , email , password} =req.body;
@@ -140,7 +140,22 @@ const updateinfo = async(req, res) =>{
 
 const fetchusers =async (req , res) =>{
 
-    const users = await prisma.user.findMany({})
+    const users = await prisma.user.findMany({
+        //
+        // select :{
+        //     _count :{
+        //         select:{
+        //             post :true,
+        //             comment: true
+        //         }
+        //     }
+        // }
+
+        ////////
+        include:{
+            post:true
+        }
+    })
 
     return res.json({
         users
