@@ -18,6 +18,7 @@ model User{
   email String @unique
   name  String?
   password String?
+  salt String
   created_at DateTime @default(now())
    
    @@map("users")

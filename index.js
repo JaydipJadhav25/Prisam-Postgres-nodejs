@@ -4,6 +4,7 @@ config({
     path :"/.env"
 })
 import express from "express"
+import cookieParser from 'cookie-parser'
 
 
 //import user routes
@@ -17,6 +18,7 @@ const app = express()
 
 //conf
 app.use(express.json());
+app.use(cookieParser());
 
 
 app.get('/', function (req, res) {
