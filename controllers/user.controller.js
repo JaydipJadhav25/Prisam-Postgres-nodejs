@@ -87,6 +87,7 @@ const loginuser = async(req, res) =>{
    .cookie("token" , token)
    .json({
     email : user.email,
+    user,
        massage : "user login suceessfully.....",
        token,
        
@@ -109,9 +110,37 @@ const logout = async (req, res) =>{
     })
 }
 
+const updateinfo = async(req, res) =>{
+      const userid  =  req.params.id
+      const {name } = req.body;
+
+      console.log("user id" , userid);
+
+      await prisma.user.update({
+        where:{
+            id : Number(userid)
+        },
+        data :{
+            name :name
+        }
+
+      })
+
+      const user = await prisma.user.findUnique({
+        where:{
+            id : Number(userid)
+        }
+      })
+      return res.json({
+        email : user.email,
+        newname : user.name,
+        massage:  "update user info successfuly..."
+      })
+}
 
 export {
     createuser,
     loginuser,
-    logout
+    logout,
+    updateinfo
 }
